@@ -70,9 +70,11 @@
      <url-pattern>/Delete Tickets</url-pattern>
    </servlet-mapping>
    
+   
+   
    <servlet>
      <servlet-name>BookingHistoryServlet</servlet-name>
-     <servlet-class>com.idiot.BookigHistoryServlet</servlet-class>
+     <servlet-class>com.idiot.BookingHistoryServlet</servlet-class>
    </servlet>
    
    <servlet-mapping>
