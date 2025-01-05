@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Booking</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('images/loginHill.jpg');
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Book Your Ticket</h2>
+        <form method="post" action="TicketBookingServlet">
+            <div class="form-group">
+                <label for="fromStation">From Station</label>
+                <select id="fromStation" name="fromStation" required>
+                    <!-- Dynamic content will be added here -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="toStation">To Station</label>
+                <select id="toStation" name="toStation" required>
+                    <!-- Dynamic content will be added here -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="class">Class</label>
+                <select id="class" name="class">
+                    <option value="First Class">First Class</option>
+                    <option value="Second Class">Second Class</option>
+                    <option value="Sleeper">Sleeper</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="numberOfPassengers">Number of Passengers:</label>
+                <input type="number" id="numberOfPassengers" name="numberOfPassengers" required>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" onClick="history.back()">Back</button>
+                <button type="submit" class="btn btn-primary">Buy Ticket</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

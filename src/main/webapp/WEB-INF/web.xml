@@ -87,7 +87,7 @@
     </listener>
   
   <welcome-file-list>
-    <welcome-file>HomePageServlet</welcome-file>
+    <welcome-file>HomePage.html</welcome-file>
   </welcome-file-list>
   
    
