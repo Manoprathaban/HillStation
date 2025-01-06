@@ -7,6 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.crypto.SecretKey;
+
+import com.idiot.util.CryptoUtil;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,8 +24,9 @@ import jakarta.servlet.http.HttpSession;
 public class UserLoginServlet extends HttpServlet {
 	
 	String url="jdbc:mysql://localhost:3306/railway_database";
-	String un="root";
-	String pwd="Mano@2001";
+	String encryptedUsername=System.getenv("ENCRYPTED_USERNAME");
+	String encryptedPassword=System.getenv("ENCRYPTED_PASSWORD");
+	String encodedKey=System.getenv("SECRET_KEY");
 	
 	Connection con=null;
 	PreparedStatement pstmt=null;
@@ -55,46 +60,57 @@ public class UserLoginServlet extends HttpServlet {
 			isValid=false;
 		}
 		else {
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con=DriverManager.getConnection(url,un,pwd);
-			
-			String query="SELECT *FROM HillUsers WHERE username=? AND password=?";
-			pstmt=con.prepareStatement(query);
-			pstmt.setString(1,username);
-			pstmt.setString(2, password);
-			
-			ResultSet rs=pstmt.executeQuery();
-			
-			if(rs.next()) {
-				
-				 HttpSession session=req.getSession();
-				 session.setAttribute("title", rs.getString("title"));
-				 session.setAttribute("firstName", rs.getString("firstName"));
-				 session.setAttribute("lastName", rs.getString("lastName"));
-				 session.setAttribute("emailId",rs.getString("emailId"));
-				 session.setAttribute("username",username);
-				 session.setAttribute("phoneNumber", rs.getString("phoneNumber"));
-				 
-				 resp.sendRedirect("MainUserInterfaceServlet");
-			}
-			else {
-				 errorMessage="Username or Password is invalid";
-				 isValid=false;
-			}
-		    con.close();
-		}catch(ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-			errorMessage="Internal server error, Please try again later";
-		}
-		}
-		if (!isValid) { 
-			req.setAttribute("errorMessage", errorMessage); 
-			req.getRequestDispatcher("/UserLogin.html").forward(req, resp); 
-			} 
-		}
-	      }
-	   
-	
+		    try {
+		        SecretKey secretKey = CryptoUtil.getSecretKeyFromEncodedKey(encodedKey);
+		        String decryptedUsername;
+		        String decryptedPassword;
 
-		
+		        try {
+		            decryptedUsername = CryptoUtil.decrypt(encryptedUsername, secretKey);
+		            decryptedPassword = CryptoUtil.decrypt(encryptedPassword, secretKey);
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		            errorMessage = "Decryption error, please try again later.";
+		            isValid = false;
+		            req.setAttribute("errorMessage", errorMessage);
+		            req.getRequestDispatcher("/UserLogin.html").forward(req, resp);
+		            return;  
+		        }
+
+		        Class.forName("com.mysql.cj.jdbc.Driver");
+		        con = DriverManager.getConnection(url, decryptedUsername, decryptedPassword);
+
+		        String query = "SELECT * FROM HillUsers WHERE username=? AND password=?";
+		        pstmt = con.prepareStatement(query);
+		        pstmt.setString(1, username);
+		        pstmt.setString(2, password);
+
+		        ResultSet rs = pstmt.executeQuery();
+
+		        if (rs.next()) {
+		            HttpSession session = req.getSession();
+		            session.setAttribute("title", rs.getString("title"));
+		            session.setAttribute("firstName", rs.getString("firstName"));
+		            session.setAttribute("lastName", rs.getString("lastName"));
+		            session.setAttribute("emailId", rs.getString("emailId"));
+		            session.setAttribute("username", username);
+		            session.setAttribute("phoneNumber", rs.getString("phoneNumber"));
+
+		            resp.sendRedirect("MainUserInterfaceServlet");
+		        } else {
+		            errorMessage = "Username or Password is invalid";
+		            isValid = false;
+		        }
+		        con.close();
+		    } catch (ClassNotFoundException | SQLException e) {
+		        e.printStackTrace();
+		        errorMessage = "Internal server error, please try again later.";
+		    }
+
+		    if (!isValid) {
+		        req.setAttribute("errorMessage", errorMessage);
+		        req.getRequestDispatcher("/UserLogin.html").forward(req, resp);
+		    }
+		}
+	}
+}
