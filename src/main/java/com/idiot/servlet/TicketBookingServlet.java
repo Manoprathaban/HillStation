@@ -49,8 +49,8 @@ public class TicketBookingServlet extends HttpServlet {
 
         // Inject dynamic content (station lists)
         String htmlString = htmlContent.toString();
-        htmlString = htmlString.replace("<!-- Dynamic content will be added here -->", generateOptions(fromStation))
-                               .replace("<!-- Dynamic content will be added here -->", generateOptions(toStation));
+        htmlString = htmlString.replace("<!-- Dynamic content will be added here -->", generateOptions(fromStation));
+        htmlString=htmlString.replace("<!-- Dynamic content will be added here -->", generateOptions(toStation));
 
         // Write the updated HTML content to the response
         resp.getWriter().println(htmlString);
@@ -111,7 +111,7 @@ public class TicketBookingServlet extends HttpServlet {
     	        e.printStackTrace();
     	        resp.setContentType("text/html");
     	        resp.getWriter().println("<h2>Decryption error, please try again later.</h2>");
-    	        return; // Exit the method if decryption fails
+    	        return; 
     	    }
 
     	    Class.forName("com.mysql.cj.jdbc.Driver");
