@@ -1,95 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" version="6.0">
   <display-name>HillRailyways</display-name>
+
   <servlet>
     <servlet-name>HomePageServlet</servlet-name>
     <servlet-class>com.idiot.HomePageServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-     <servlet-name>HomePageServlet</servlet-name>
-     <url-pattern>/home</url-pattern>
+    <servlet-name>HomePageServlet</servlet-name>
+    <url-pattern>/home</url-pattern>
   </servlet-mapping>
   
   <servlet>
-     <servlet-name>UserSignUpServlet</servlet-name>
-     <servlet-class>com.idiot.UserSignUpServlet</servlet-class>
+    <servlet-name>UserSignUpServlet</servlet-name>
+    <servlet-class>com.idiot.UserSignUpServlet</servlet-class>
   </servlet>
-  
   <servlet-mapping>
-     <servlet-name>UserSignUpServlet</servlet-name>
-     <url-pattern>/signUp</url-pattern>
+    <servlet-name>UserSignUpServlet</servlet-name>
+    <url-pattern>/signUp</url-pattern>
   </servlet-mapping>
   
   <servlet>
-     <servlet-name>UserLoginServlet</servlet-name>
-     <servlet-class>com.idiot.UserLoginServlet</servlet-class>
+    <servlet-name>UserLoginServlet</servlet-name>
+    <servlet-class>com.idiot.UserLoginServlet</servlet-class>
   </servlet>
-  
   <servlet-mapping>
-     <servlet-name>UserLoginServlet</servlet-name>
-     <url-pattern>/Login</url-pattern>
+    <servlet-name>UserLoginServlet</servlet-name>
+    <url-pattern>/Login</url-pattern>
   </servlet-mapping>
   
   <servlet>
-  <servlet-name>TicketBookingServlet</servlet-name>
-  <servlet-class>com.idiot.TicketBookingServlet</servlet-class>
+    <servlet-name>TicketBookingServlet</servlet-name>
+    <servlet-class>com.idiot.TicketBookingServlet</servlet-class>
   </servlet>
-  
-   <servlet-mapping>
-   <servlet-name>TicketBookingServlet</servlet-name>
-   <url-pattern>/Book Tickets</url-pattern>
-   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>TicketBookingServlet</servlet-name>
+    <url-pattern>/BookTickets</url-pattern>
+  </servlet-mapping>
    
-   <servlet>
-   <servlet-name>MainUserInterfaceServlet</servlet-name>
-   <servlet-class>com.idiot.MainUserInterfaceServlet</servlet-class>
-   </servlet>
-   
-   <servlet-mapping>
+  <servlet>
+    <servlet-name>MainUserInterfaceServlet</servlet-name>
+    <servlet-class>com.idiot.MainUserInterfaceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
     <servlet-name>MainUserInterfaceServlet</servlet-name>
     <url-pattern>/MainUser</url-pattern>
-   </servlet-mapping>
+  </servlet-mapping>
    
-   <servlet>
-     <servlet-name>UpdateTicketServlet</servlet-name>
-     <servlet-class>com.idiot.UpdateTicketServlet</servlet-class>
-   </servlet>
+  <servlet>
+    <servlet-name>UpdateTicketServlet</servlet-name>
+    <servlet-class>com.idiot.UpdateTicketServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateTicketServlet</servlet-name>
+    <url-pattern>/UpdateTickets</url-pattern>
+  </servlet-mapping>
    
-   <servlet-mapping>
-     <servlet-name>UpdateTicketServlet</servlet-name>
-     <url-pattern>/Update Tickets</url-pattern>
-   </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteTicketServlet</servlet-name>
+    <servlet-class>com.idiot.DeleteTicketServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTicketServlet</servlet-name>
+    <url-pattern>/DeleteTickets</url-pattern>
+  </servlet-mapping>
    
-   <servlet>
-     <servlet-name>DeleteTicketServlet</servlet-name>
-     <servlet-class>com.idiot.DeleteTicketServlet</servlet-class>
-   </servlet>
-   
-   <servlet-mapping>
-     <servlet-name>DeleteTicketServlet</servlet-name>
-     <url-pattern>/Delete Tickets</url-pattern>
-   </servlet-mapping>
-   
-   
-   
-   <servlet>
-     <servlet-name>BookingHistoryServlet</servlet-name>
-     <servlet-class>com.idiot.BookingHistoryServlet</servlet-class>
-   </servlet>
-   
-   <servlet-mapping>
-     <servlet-name>BookingHistoryServlet</servlet-name>
-     <url-pattern>/Booking history</url-pattern>
-   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>BookingHistoryServlet</servlet-name>
+    <servlet-class>com.idiot.BookingHistoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BookingHistoryServlet</servlet-name>
+    <url-pattern>/BookingHistory</url-pattern>
+  </servlet-mapping>
+
   <listener>
-        <listener-class>com.idiot.servlet.AppContextListener</listener-class>
-    </listener>
-  
+    <listener-class>com.idiot.servlet.AppContextListener</listener-class>
+  </listener>
+
   <welcome-file-list>
     <welcome-file>HomePage.html</welcome-file>
   </welcome-file-list>
-  
-   
-  
 </web-app>

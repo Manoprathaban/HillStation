@@ -28,9 +28,10 @@ public class UserSignUpServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String errorMessage = (String) req.getAttribute("errorMessage");
+ 
         resp.setContentType("text/html");
-        resp.getWriter().println("<h3>" + errorMessage + "</h3>");
+        req.getRequestDispatcher("/UserSignUp.html").forward(req,resp);
+        
     }
 
     @Override

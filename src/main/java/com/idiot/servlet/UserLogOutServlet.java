@@ -1,52 +1,33 @@
 package com.idiot.servlet;
 
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
-import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.http.HttpServlet;
 import java.io.IOException;
 
-/**
- * Servlet Filter implementation class UserLogOutServlet
- */
-@WebFilter("/UserLogOutServlet")
-public class UserLogOutServlet extends HttpServlet implements Filter {
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserLogOutServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-	/**
-	 * @see Filter#destroy()
-	 */
-	public void destroy() {
-		// TODO Auto-generated method stub
+@WebServlet("/UserlogoutServlet")
+public class UserlogoutServlet extends HttpServlet {
+	
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	 
+		HttpSession session=request.getSession();
+		
+		if(session!=null) {
+			session.invalidate();
+		}
+		response.sendRedirect("UserLogin.html");
 	}
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-
-		// pass the request along the filter chain
-		chain.doFilter(request, response);
-	}
-
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request,response);
+		
 	}
 
 }

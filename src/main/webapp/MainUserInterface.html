@@ -30,11 +30,67 @@
             border-radius: 4px;
             margin-right: 15px;
         }
+        .logout-form{
+            position:fixed;
+            top:20px;
+            right:20px;
+        }
+        .logout-button{
+            background-color: #007BFF;
+            color: white; 
+            border: none; 
+            padding: 10px 20px;
+            border-radius: 50%; 
+            cursor: pointer; 
+            text-align: center; 
+            margin-bottom:3px;
+            font-size: 16px;
+        }
+        .logout-button:hover{
+            background-color:#0056b3;
+        }
+        .button{
+            display:block;
+            width:200px;
+            margin:10px auto;
+            margin-bottom:3px;
+            padding:10px;
+            background-color:#007BFF;
+            color:white;
+            border:none;
+            border-radius:5px;
+            text-align:center;
+            cursor:pointer;
+            text-decoration:none;
+        }
+        .button:hover{
+           background-color:#0056b3;
+        }
+        .back-button{
+            position:fixed;
+            margin-bottom:3px;
+            bottom:20px;
+            left:20px;
+            background-color:#007BFF;
+            color:white;
+            border:none;
+            border-radius:5px;
+            text-align:center;
+            cursor:pointer;
+            text-decoration:none;
+        }
+        .back-button:hover{
+           background-color:#0056b3;
+        }
+        
     </style>
 </head>
 <body class="bg-light">
     <div class="container mt-5">
         <h1 class="text-center">Main User Interface</h1>
+        <form action="UserlogoutServlet" method="post" class="logout-form"> 
+          <button type="submit" class="logout-button">Logout</button> 
+            </form>
         <div class="row justify-content-center mt-4">
             <div class="col-12 text-center mb-2">
                 <a href="TicketBookingServlet" class="btn-primary">Ticket Booking</a>
@@ -48,7 +104,7 @@
             <div class="col-12 text-center mb-2">
                 <a href="BookingHistoryServlet" class="btn-primary">Booking History</a>
             </div>
-            <button type="submit" class="btn-primary" onClick="history.back()">Back</button>
+            <button type="submit" class="back-button" onClick="history.back()">Back</button>
         </div>
     </div>
 </body>
