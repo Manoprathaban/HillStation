@@ -48,22 +48,9 @@
             margin-top: 10px;
             border-radius: 5px;
         }
-        .error, .success {
-            font-weight: bold;
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            width: 100%;
-        }
-        .error {
-            color: black;
-            background-color: green;
-        }
-        .success {
-            color: black;
-            background-color: black;
-        }
+
+
+        
     </style>
 </head>
 <body>
@@ -81,7 +68,19 @@
             <button type="submit" class="btn btn-primary btn-block">Login</button>
             <button type="button" class="btn btn-secondary btn-block" onClick="history.back()">Back</button>
         </form>
-        
-    </div>
+                </div>
+          <script>
+        // Function to get query parameter value by name
+        function getQueryParam(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        // Check for an error message and display it in an alert
+        const errorMessage = getQueryParam("errorMessage");
+        if (errorMessage) {
+            alert(errorMessage);
+        }
+    </script>
 </body>
 </html>

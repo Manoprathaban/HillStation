@@ -108,9 +108,10 @@ public class UserLoginServlet extends HttpServlet {
 		    }
 
 		    if (!isValid) {
-		        req.setAttribute("errorMessage", errorMessage);
-		        req.getRequestDispatcher("/UserLogin.html").forward(req, resp);
+		        resp.sendRedirect("UserLogin.html?errorMessage=" + java.net.URLEncoder.encode(errorMessage, "UTF-8"));
+		        return;
 		    }
+
 		}
 	}
 }
