@@ -1,5 +1,6 @@
 package com.idiot.util;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 import javax.crypto.Cipher;
@@ -18,9 +19,13 @@ public class CryptoUtil extends HttpServlet {
 		 return new String(decryptedBytes);
 	 }
 	 
-	 public static SecretKey getSecretKeyFromEncodedKey(String encodedKey) {
-		   byte[] decodedKeyBytes=Base64.getDecoder().decode(encodedKey);
-		   return new SecretKeySpec(decodedKeyBytes, 0, decodedKeyBytes.length, "AES");
+		 public static SecretKey getSecretKeyFromEncodedKey(String src) {
+			    if (src == null || src.isEmpty()) {
+			        throw new IllegalArgumentException("Encoded key must not be null or empty");
+			    }
+			    byte[] decodedKey = Base64.getDecoder().decode(src.getBytes(StandardCharsets.UTF_8));
+			    return new SecretKeySpec(decodedKey, 0, decodedKey.length, "AES");
+			}
+
 	 }
 
-}
